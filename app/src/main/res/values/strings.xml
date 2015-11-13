@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HeadsUp</string>
+    <string name="start_text">Press to start!</string>
+    <string name="times_up">Time\'s up!</string>
+</resources>
