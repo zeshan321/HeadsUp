@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.widget.TextView;
 
 public class SensorListener implements SensorEventListener {
@@ -16,6 +17,7 @@ public class SensorListener implements SensorEventListener {
 
     long lastUpdate;
     boolean currentStatus = true;
+    boolean inCheck = true;
 
     public SensorListener(Activity activity) {
         this.activity = activity;
@@ -47,19 +49,32 @@ public class SensorListener implements SensorEventListener {
             if ((actualTime - lastUpdate) > 200) {
                 lastUpdate = actualTime;
 
-                // Down
-                if (z < -5) {
-                    textStatus.setText("Down");
-                    return;
+                // Right
+                if (z < -5 ) {
+                    if (inCheck) {
+                        inCheck = false;
+                        textStatus.setText("Correct");
+                        onCorrect();
+                        return;
+                    } else {
+                        return;
+                    }
                 }
 
-                // Up
+                // Wrong
                 if (z > 5) {
-                    textStatus.setText("Up");
-                    return;
+                    if (inCheck) {
+                        inCheck = false;
+                        textStatus.setText("Skip");
+                        onWrong();
+                        return;
+                    } else {
+                        return;
+                    }
                 }
 
                 // Other
+                inCheck = true;
                 textStatus.setText("Default");
             }
         }
@@ -67,6 +82,16 @@ public class SensorListener implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+
+    private void onCorrect() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.right);
+        mediaPlayer.start();
+    }
+
+    private void onWrong() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.wrong);
+        mediaPlayer.start();
+    }
 
     public void cancel() {
         currentStatus = false;

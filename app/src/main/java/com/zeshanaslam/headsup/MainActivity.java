@@ -33,13 +33,17 @@ public class MainActivity extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
 
         // Start game
-        final TextView textView = (TextView) findViewById(R.id.textStatus);
-        textView.setOnClickListener(new View.OnClickListener() {
+        final TextView textStatus = (TextView) findViewById(R.id.textStatus);
+        textStatus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TextView scoreView = (TextView) findViewById(R.id.textTimer);
-                scoreView.setVisibility(View.VISIBLE);
+                if (!textStatus.getText().equals(getResources().getString(R.string.times_up))) {
+                    scoreView.setVisibility(View.VISIBLE);
 
-                new Timer((Activity) context, new SensorListener((Activity) context) ,60000, 1000).start();
+                    new Timer((Activity) context, new SensorListener((Activity) context), 60000, 1000).start();
+                } else {
+                    // Show score
+                }
             }
         });
     }
