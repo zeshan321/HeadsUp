@@ -112,7 +112,7 @@ public class SensorListener implements SensorEventListener {
         lastWord = 1;
         score = score + 150;
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.wrong);
+        MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.right);
         mediaPlayer.start();
 
         Integer colorFrom = activity.getResources().getColor(R.color.colorPrimary);

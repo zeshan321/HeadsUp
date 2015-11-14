@@ -2,11 +2,31 @@
 <resources>
     <string-array name="wordslist_array">
 
-        <item>Cars</item>
-        <item>Bikes</item>
-        <item>RVs</item>
-        <item>Trucks</item>
-        <item>Other Vehicles</item>
+        <item>Adidas</item>
+        <item>Airbag</item>
+        <item>Beer</item>
+        <item>Bicycle</item>
+        <item>Publishing</item>
+        <item>Chip Card</item>
+        <item>Christmas Tree</item>
+        <item>Contact Lenses</item>
+        <item>Hand Glider</item>
+        <item>Gummy Bear</item>
+        <item>Helicopter</item>
+        <item>Motorcycle</item>
+        <item>Porsche</item>
+        <item>Record Player</item>
+        <item>Refrigerator</item>
+        <item>Scanner</item>
+        <item>Tape Recorder</item>
+        <item>Tooth Paste</item>
+        <item>Thermal Flask</item>
+        <item>X-Ray</item>
+        <item>Zeppelin</item>
+        <item>Assault Rifle</item>
+        <item>Glue Stick</item>
+        <item>Laundry Detergent</item>
+        <item>Car Spoiler</item>
 
     </string-array>
 </resources>
