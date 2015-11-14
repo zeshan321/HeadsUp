@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="wordslist_array">
+
+        <item>Cars</item>
+        <item>Bikes</item>
+        <item>RVs</item>
+        <item>Trucks</item>
+        <item>Other Vehicles</item>
+
+    </string-array>
+</resources>

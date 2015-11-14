@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Context context;
+    boolean gameStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,15 @@ public class MainActivity extends AppCompatActivity {
         textStatus.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TextView scoreView = (TextView) findViewById(R.id.textTimer);
-                if (!textStatus.getText().equals(getResources().getString(R.string.times_up))) {
+                if (!gameStatus) {
+                    gameStatus = true;
                     scoreView.setVisibility(View.VISIBLE);
 
-                    new Timer((Activity) context, new SensorListener((Activity) context), 60000, 1000).start();
+                    SensorListener sensorListener = new SensorListener((Activity) context);
+                    Timer timer =  new Timer((Activity) context, sensorListener, 60000, 1000);
+
+                    sensorListener.setTimer(timer);
+                    timer.start();
                 } else {
                     // Show score
                 }

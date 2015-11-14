@@ -2,4 +2,7 @@
     <string name="app_name">HeadsUp</string>
     <string name="start_text">Press to start!</string>
     <string name="times_up">Time\'s up!</string>
+    <string name="game_over">Done!</string>
+    <string name="motion_correct">Correct!</string>
+    <string name="montion_wrong">Wrong!</string>
 </resources>

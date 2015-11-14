@@ -48,7 +48,7 @@ public class Timer extends CountDownTimer {
 
                 relativeLayout.setBackgroundColor((Integer) animator.getAnimatedValue());
 
-                scoreView.setVisibility(View.INVISIBLE);
+                scoreView.setText("Score: " + sensorListener.getScore());
                 textStatus.setText(activity.getResources().getString(R.string.times_up));
             }
 
