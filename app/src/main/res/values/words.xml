@@ -4,8 +4,10 @@
 
         <item>Adidas</item>
         <item>Airbag</item>
+        <item>Aspirin</item>
         <item>Beer</item>
         <item>Bicycle</item>
+        <item>Bunsen Burner</item>
         <item>Publishing</item>
         <item>Chip Card</item>
         <item>Christmas Tree</item>
@@ -27,6 +29,9 @@
         <item>Glue Stick</item>
         <item>Laundry Detergent</item>
         <item>Car Spoiler</item>
+        <item>Cocaine</item>
+        <item>Helicopter</item>
+        <item>Binary</item>
 
     </string-array>
 </resources>

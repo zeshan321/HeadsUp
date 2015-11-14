@@ -43,12 +43,10 @@ public class MainActivity extends AppCompatActivity {
                     scoreView.setVisibility(View.VISIBLE);
 
                     SensorListener sensorListener = new SensorListener((Activity) context);
-                    Timer timer =  new Timer((Activity) context, sensorListener, 60000, 1000);
+                    Timer timer =  new Timer((Activity) context, sensorListener, 600000, 1000);
 
                     sensorListener.setTimer(timer);
                     timer.start();
-                } else {
-                    // Show score
                 }
             }
         });

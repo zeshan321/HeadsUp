@@ -66,8 +66,9 @@ public class SensorListener implements SensorEventListener {
             if ((actualTime - lastUpdate) > 100) {
                 lastUpdate = actualTime;
 
+                System.out.println("Z: " + z);
                 // Right
-                if (z < -5 ) {
+                if (z < -6) {
                     if (inCheck) {
                         inCheck = false;
                         nextWord = true;
@@ -79,7 +80,7 @@ public class SensorListener implements SensorEventListener {
                 }
 
                 // Wrong
-                if (z > 5) {
+                if (z > 6) {
                     if (inCheck) {
                         inCheck = false;
                         nextWord = true;
