@@ -63,10 +63,9 @@ public class SensorListener implements SensorEventListener {
             float z = values[2];
 
             long actualTime = System.currentTimeMillis();
-            if ((actualTime - lastUpdate) > 100) {
+            if ((actualTime - lastUpdate) > 250) {
                 lastUpdate = actualTime;
 
-                System.out.println("Z: " + z);
                 // Right
                 if (z < -6) {
                     if (inCheck) {
