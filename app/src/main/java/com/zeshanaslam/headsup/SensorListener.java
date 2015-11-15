@@ -215,6 +215,7 @@ public class SensorListener implements SensorEventListener {
 
     public void cancel() {
         currentStatus = false;
+        sensorManager.unregisterListener(this);
     }
 
     public int getScore() {
