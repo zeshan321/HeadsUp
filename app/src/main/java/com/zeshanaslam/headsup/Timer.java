@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.CountDownTimer;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
