@@ -9,6 +9,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
+import android.support.v4.content.ContextCompat;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,12 +58,10 @@ public class SensorListener implements SensorEventListener {
             float[] values = event.values;
 
             // Movement
-            float x = values[0];
-            float y = values[1];
             float z = values[2];
 
             long actualTime = System.currentTimeMillis();
-            if ((actualTime - lastUpdate) > 250) {
+            if ((actualTime - lastUpdate) > 150) {
                 lastUpdate = actualTime;
 
                 // Right
@@ -90,7 +89,7 @@ public class SensorListener implements SensorEventListener {
                 }
 
                 // Other
-                if (nextWord) {
+                if (nextWord && z > -3 && z < 3) {
                     inCheck = true;
                     onDefault();
                     if (wordHandler.hasNext()) {
@@ -111,11 +110,13 @@ public class SensorListener implements SensorEventListener {
         lastWord = 1;
         score = score + 150;
 
+        textStatus.setText(activity.getResources().getString(R.string.motion_correct));
+
         MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.right);
         mediaPlayer.start();
 
-        Integer colorFrom = activity.getResources().getColor(R.color.colorPrimary);
-        Integer colorTo = activity.getResources().getColor(R.color.colorRight);
+        Integer colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorPrimary);
+        Integer colorTo = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorRight);
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -126,7 +127,6 @@ public class SensorListener implements SensorEventListener {
 
                 relativeLayout.setBackgroundColor((Integer) animator.getAnimatedValue());
 
-                textStatus.setText(activity.getResources().getString(R.string.motion_correct));
             }
 
         });
@@ -137,11 +137,13 @@ public class SensorListener implements SensorEventListener {
         lastWord = 2;
         score = score - 150;
 
+        textStatus.setText(activity.getResources().getString(R.string.motion_wrong));
+
         MediaPlayer mediaPlayer = MediaPlayer.create(activity, R.raw.wrong);
         mediaPlayer.start();
 
-        Integer colorFrom = activity.getResources().getColor(R.color.colorPrimary);
-        Integer colorTo = activity.getResources().getColor(R.color.colorWrong);
+        Integer colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorPrimary);
+        Integer colorTo = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorWrong);
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -152,7 +154,6 @@ public class SensorListener implements SensorEventListener {
 
                 relativeLayout.setBackgroundColor((Integer) animator.getAnimatedValue());
 
-                textStatus.setText(activity.getResources().getString(R.string.montion_wrong));
             }
 
         });
@@ -164,14 +165,14 @@ public class SensorListener implements SensorEventListener {
             return;
         }
 
-        Integer colorFrom = null;
+        Integer colorFrom;
         if (lastWord == 1) {
-            colorFrom = activity.getResources().getColor(R.color.colorRight);
+            colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorRight);
         } else {
-            colorFrom = activity.getResources().getColor(R.color.colorWrong);
+            colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorWrong);
         }
 
-        Integer colorTo = activity.getResources().getColor(R.color.colorPrimary);
+        Integer colorTo = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorPrimary);
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -188,8 +189,8 @@ public class SensorListener implements SensorEventListener {
     }
 
     private void onComplete() {
-        Integer colorFrom = activity.getResources().getColor(R.color.colorRight);
-        Integer colorTo = activity.getResources().getColor(R.color.colorPrimary);
+        Integer colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorRight);
+        Integer colorTo = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorPrimary);
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -204,7 +205,7 @@ public class SensorListener implements SensorEventListener {
                 timer.cancel();
 
                 TextView scoreView = (TextView) activity.findViewById(R.id.textTimer);
-                scoreView.setText("Score: " + getScore());
+                scoreView.setText(String.format(activity.getString(R.string.finished_score), score));
                 textStatus.setText(activity.getResources().getString(R.string.game_over));
             }
 
@@ -215,9 +216,5 @@ public class SensorListener implements SensorEventListener {
     public void cancel() {
         currentStatus = false;
         sensorManager.unregisterListener(this);
-    }
-
-    public int getScore() {
-        return score;
     }
 }

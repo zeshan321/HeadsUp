@@ -23,10 +23,8 @@ public class WordHandler {
     }
 
     public String getNext() {
-        int index = new Random().nextInt(words.size());
-        String word = words.get(index);
-
-        words.remove(index);
+        String word = words.get(new Random().nextInt(words.size()));
+        words.remove(word);
 
         return word;
     }

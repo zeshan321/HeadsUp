@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,8 +35,8 @@ public class Timer extends CountDownTimer {
     public void onFinish() {
         sensorListener.cancel();
 
-        Integer colorFrom = activity.getResources().getColor(R.color.colorPrimary);
-        Integer colorTo = activity.getResources().getColor(R.color.colorWrong);
+        Integer colorFrom = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorPrimary);
+        Integer colorTo = ContextCompat.getColor(activity.getApplicationContext(), R.color.colorWrong);
 
         ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -47,7 +48,7 @@ public class Timer extends CountDownTimer {
 
                 relativeLayout.setBackgroundColor((Integer) animator.getAnimatedValue());
 
-                scoreView.setText("Score: " + sensorListener.getScore());
+                scoreView.setText(String.format(activity.getString(R.string.finished_score), sensorListener.score));
                 textStatus.setText(activity.getResources().getString(R.string.times_up));
             }
 
