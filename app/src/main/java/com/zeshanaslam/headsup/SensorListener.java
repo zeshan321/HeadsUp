@@ -13,6 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
 public class SensorListener implements SensorEventListener {
 
     WordHandler wordHandler;
@@ -29,8 +34,12 @@ public class SensorListener implements SensorEventListener {
     boolean inCheck = true;
     boolean nextWord = true;
 
-    public SensorListener(Activity activity) {
+    String objectID;
+
+    public SensorListener(Activity activity, String objectID) {
         this.activity = activity;
+        this.objectID = objectID;
+
         textStatus = (TextView) activity.findViewById(R.id.textStatus);
 
         sensorManager = (SensorManager) activity.getSystemService((Context.SENSOR_SERVICE));
@@ -109,6 +118,7 @@ public class SensorListener implements SensorEventListener {
     private void onCorrect() {
         lastWord = 1;
         score = score + 150;
+        updateScore();
 
         textStatus.setText(activity.getResources().getString(R.string.motion_correct));
 
@@ -136,6 +146,7 @@ public class SensorListener implements SensorEventListener {
     private void onWrong() {
         lastWord = 2;
         score = score - 150;
+        updateScore();
 
         textStatus.setText(activity.getResources().getString(R.string.motion_wrong));
 
@@ -211,6 +222,19 @@ public class SensorListener implements SensorEventListener {
 
         });
         colorAnimation.start();
+    }
+
+    private void updateScore() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("groups");
+
+        query.getInBackground(objectID, new GetCallback<ParseObject>() {
+            public void done(ParseObject gameScore, ParseException e) {
+                if (e == null) {
+                    gameScore.put("score", score);
+                    gameScore.saveInBackground();
+                }
+            }
+        });
     }
 
     public void cancel() {

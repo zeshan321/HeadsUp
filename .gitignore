@@ -8,3 +8,4 @@
 *.properties
 *.bat
 gradlew
+app/src/main/res/values/keys.xml

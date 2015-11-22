@@ -6,4 +6,7 @@
     <string name="motion_correct">Correct!</string>
     <string name="motion_wrong">Wrong!</string>
     <string name="finished_score">Score: %1$s!</string>
+    <string name="loading">Loading...</string>
+    <string name="team_name">Team Name</string>
+    <string name="team_name_enter">Enter a team name</string>
 </resources>
