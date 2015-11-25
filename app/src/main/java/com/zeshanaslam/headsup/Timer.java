@@ -44,7 +44,7 @@ public class Timer extends CountDownTimer {
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
                 RelativeLayout relativeLayout = (RelativeLayout) activity.findViewById(R.id.mainLayout);
-                TextView textStatus = (TextView)activity.findViewById(R.id.textStatus);
+                TextView textStatus = (TextView) activity.findViewById(R.id.textStatus);
 
                 relativeLayout.setBackgroundColor((Integer) animator.getAnimatedValue());
 

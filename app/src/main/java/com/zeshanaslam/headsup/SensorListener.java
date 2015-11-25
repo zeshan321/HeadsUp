@@ -20,21 +20,19 @@ import com.parse.ParseQuery;
 
 public class SensorListener implements SensorEventListener {
 
-    WordHandler wordHandler;
+    private WordHandler wordHandler;
+    private Activity activity;
+    private SensorManager sensorManager;
+    private TextView textStatus;
+    private long lastUpdate;
+    private int lastWord = 0;
+    private boolean currentStatus = true;
+    private boolean inCheck = true;
+    private boolean nextWord = true;
+    private String objectID;
 
-    Activity activity;
-    SensorManager sensorManager;
-    Timer timer;
-    TextView textStatus;
-
-    long lastUpdate;
-    int score = 0;
-    int lastWord = 0;
-    boolean currentStatus = true;
-    boolean inCheck = true;
-    boolean nextWord = true;
-
-    String objectID;
+    public Timer timer = null;
+    public int score = 0;
 
     public SensorListener(Activity activity, String objectID) {
         this.activity = activity;
@@ -50,10 +48,10 @@ public class SensorListener implements SensorEventListener {
         lastUpdate = System.currentTimeMillis();
 
         wordHandler = new WordHandler(activity);
-    }
 
-    public void setTimer(Timer timer) {
-        this.timer = timer;
+        // Set first word
+        textStatus.setText(wordHandler.getNext());
+        nextWord = false;
     }
 
     @Override
@@ -113,7 +111,8 @@ public class SensorListener implements SensorEventListener {
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
 
     private void onCorrect() {
         lastWord = 1;

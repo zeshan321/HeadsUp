@@ -7,7 +7,7 @@ import com.parse.Parse;
 
 public class ParseSetup extends Application {
 
-    Context con;
+    private Context con;
 
     @Override
     public void onCreate() {

@@ -17,11 +17,10 @@ import com.parse.SaveCallback;
 
 public class MainActivity extends AppCompatActivity {
 
-    Context context;
-
-    String teamName = null;
-    String objectID = null;
-    boolean gameStatus = false;
+    private Context context;
+    private String teamName = null;
+    private String objectID = null;
+    private boolean gameStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Make it fullscreen
         getSupportActionBar().hide();
-       // updateUI();
+        updateUI();
 
         showDialog();
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     SensorListener sensorListener = new SensorListener((Activity) context, objectID);
                     Timer timer = new Timer((Activity) context, sensorListener, 600000, 1000);
 
-                    sensorListener.setTimer(timer);
+                    sensorListener.timer = timer;
                     timer.start();
                 }
             }

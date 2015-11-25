@@ -9,12 +9,9 @@ import java.util.Random;
 
 public class WordHandler {
 
-    List<String> words = new ArrayList<>();
-    Activity activity;
+    private List<String> words = new ArrayList<>();
 
     public WordHandler(Activity activity) {
-        this.activity = activity;
-
         Collections.addAll(words, activity.getResources().getStringArray(R.array.wordslist_array));
     }
 
